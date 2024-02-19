@@ -16,10 +16,52 @@ const Contact = () => {
     message: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const handleChange = (e) => {};
+  // template_wvqaoek
+  // service_yvk6hbi
+  // bo7hAmJWfMAOo5h5P
 
-  const handleSubmit = (e) => {};
+  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs
+      .send(
+        "service_yvk6hbi",
+        "template_wvqaoek",
+        {
+          from_name: form.name,
+          to_name: "Adrian",
+          from_email: form.email,
+          to_email: "tejassaindane4483@gmail.com",
+          message: form.message,
+        },
+        "bo7hAmJWfMAOo5h5P"
+      )
+      .then(
+        () => {
+          setLoading(false);
+          alert("Thank you, I will get back to you as soon as possible.");
+
+          setForm({
+            name: "",
+            email: "",
+            message: "",
+          });
+        },
+        (error) => {
+          setLoading(false);
+          console.log(error);
+          alert("something went wrong.");
+        }
+      );
+  };
+
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
       <motion.div
